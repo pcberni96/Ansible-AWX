@@ -1,0 +1,43 @@
+---
+- name: Create VM on oVirt-RHV
+  hosts: "{{ hosts-inventory }}"
+
+  pre_tasks:
+     - name: Login to oVirt-RHV
+       ovirt_auth:
+         hostname: "{{ hostname-manager }}"
+         insecure: yes
+         username: "{{ admin-name }}"@internal
+         password: "{{ password-admin }}"
+     
+  tasks:
+    - name: Create VM from template 
+      ovirt_vm:
+        auth: "{{ ovirt_auth }}"
+        cluster: "{{ cluster-name }}"
+        template: "{{ template-name }}"
+        name: "{{ fdqn-vm }}"
+        memory: "{{ memory-number }}"
+        state: running 
+        cloud_init:
+          host_name: "{{ fdqn-vm }}"."{{ domain }}"
+          user_name: root
+          root_password: "{{ password_root }}"
+          nic_name: eth0
+          nic_on_boot: true 
+          nic_boot_protocol: static
+          nic_ip_address: "{{ ip_address }}"
+          nic_netmask: "{{ netmask }}"
+          nic_gateway: "{{ gateway }}"
+          dns_servers: "{{ dns-server }}"
+          
+          custom_script: | 
+            runcmd:
+              - hostnamectl set-hostname {{ fdqn-vm }}.{{ domain }}
+              - yum -y remove cloud-init
+   
+   post_tasks:
+     - name: Logout from oVirt
+       ovirt_auth:
+         ovirt_auth: "{{ ovirt_auth }}"
+         state: absent

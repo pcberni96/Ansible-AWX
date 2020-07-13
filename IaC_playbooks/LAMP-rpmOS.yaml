@@ -1,0 +1,55 @@
+--- 
+- name:
+  hosts: "{{ developer-vm }}"
+  
+  tasks:   
+     - name: Install packages 
+       yum: 
+        name:
+          - httpd 
+          - epel-release
+          - http://rpms.remirepo.net/enterprise/remi-release-"{{ latest }}".rpm
+          - yum-utils
+          - mariadb-server
+          - mariadb
+          - git
+        state: latest
+     
+     - name: Config remi repo
+         command: yum-config-manager --enable remi-php74
+     
+     - name: Upgrade all packages
+       yum: 
+         name:'*'
+         state: latest
+     
+     - name: Install php
+       yum:
+         name: 
+           - php
+           - php-mcrypt
+           - php-cli
+           - php-gd
+           - php-curl
+           - php-mysql
+           - php-ldap
+           - php-zip
+           - php-fileinfo
+           - php-fpm
+         state: latest
+    
+    - name: Configure Firewalld 
+      firewalld:
+        service:
+          - https
+          - http
+          - mysql
+        permanent: yes
+        state: enabled
+     
+   - name: Star Services 
+     systemd:
+       name:
+        - httpd
+        - mariadb
+       state: started

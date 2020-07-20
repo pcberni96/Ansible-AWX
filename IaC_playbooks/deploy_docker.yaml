@@ -16,7 +16,7 @@
         enabled: yes
     
     - name: Enable test repositories 1
-      command: yum-utils --enable docker-ce-nightly
+      command: yum-config-manager --enable docker-ce-nightly
     
     - name: Enable test repositories 2
       command: yum-utils --enable docker-ce-test

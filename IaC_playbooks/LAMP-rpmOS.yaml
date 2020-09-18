@@ -15,9 +15,12 @@
           - git
         state: latest
      
+     - name: Enable PHP remi
+       command: yum-config-manager --enable remi-php74
+       
      - name: Upgrade all packages
        yum: 
-         name: *
+         name: '*'
          state: latest
      
      - name: Install php

@@ -1,6 +1,6 @@
 ---
 - name: Install packages for Docker Developers 
-  hosts: "{{ vm-developer }}"
+  hosts: all
   
   tasks:
      

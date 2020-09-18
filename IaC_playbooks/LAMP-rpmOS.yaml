@@ -9,14 +9,11 @@
           - httpd 
           - epel-release
           - http://rpms.remirepo.net/enterprise/remi-release-8.rpm
-          - yum-utils
+          - dnf-utils
           - mariadb-server
           - mariadb
           - git
         state: latest
-     
-     - name: Enable PHP remi
-       command: yum-config-manager --enable remi-php74
        
      - name: Upgrade all packages
        yum: 
@@ -37,6 +34,7 @@
            - php-fileinfo
            - php-fpm
         state: latest
+        enablerepo: 'remi-php74'
          
      - name: Configure Firewalld 
        firewalld:

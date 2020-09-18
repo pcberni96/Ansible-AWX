@@ -39,17 +39,17 @@
         state: latest
          
      - name: Configure Firewalld 
-        firewalld:
-          service:
-            - https
-            - http
-            - mysql
-          permanent: yes
-          state: enabled
+       firewalld:
+         service:
+               - https
+               - http
+               - mysql
+         permanent: yes
+         state: enabled
      
-     - name: Star Services 
-        systemd:
-           name:
+     - name: Start Services 
+       systemd:
+          name:
              - httpd
              - mariadb
-           state: started
+          state: started

@@ -25,7 +25,7 @@
      
      - name: Install php
        yum:
-         name: 
+        name: 
            - php
            - php-mcrypt
            - php-cli
@@ -36,20 +36,20 @@
            - php-zip
            - php-fileinfo
            - php-fpm
-         state: latest
-    
-    - name: Configure Firewalld 
-      firewalld:
-        service:
-          - https
-          - http
-          - mysql
-        permanent: yes
-        state: enabled
+        state: latest
+         
+     - name: Configure Firewalld 
+        firewalld:
+          service:
+            - https
+            - http
+            - mysql
+          permanent: yes
+          state: enabled
      
-   - name: Star Services 
-     systemd:
-       name:
-        - httpd
-        - mariadb
-       state: started
+     - name: Star Services 
+        systemd:
+           name:
+             - httpd
+             - mariadb
+           state: started

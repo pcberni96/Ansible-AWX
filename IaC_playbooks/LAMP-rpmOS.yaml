@@ -1,6 +1,6 @@
 --- 
 - name:
-  hosts: "{{ developer-vm }}"
+  hosts: all
   
   tasks:   
      - name: Install packages 
@@ -8,7 +8,7 @@
         name:
           - httpd 
           - epel-release
-          - http://rpms.remirepo.net/enterprise/remi-release-"{{ latest }}".rpm
+          - http://rpms.remirepo.net/enterprise/remi-release-8.rpm
           - yum-utils
           - mariadb-server
           - mariadb

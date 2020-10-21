@@ -12,7 +12,6 @@ echo "----------------------------------------------"
 
 export admin_passwd='Pon_tu_password'
 export pg_passwd='Pon_tu_password'
-export rabbitmq_passwd='Pon_tu_password'
 
 echo "Instalación/Update software requerido "
 echo "----------------------------------------------"
@@ -51,8 +50,6 @@ echo "------------------------------------------------"
 sed -i '/admin_password=/ c admin_password=\'\'$admin_passwd'\'\' /tmp/tower/$(ls -a /tmp/tower | grep ansible-tower-setup-[34])/inventory
 
 sed -i '/pg_password=/ c pg_password=\'\'$pg_passwd'\'\' /tmp/tower/$(ls -a /tmp/tower | grep ansible-tower-setup-[34])/inventory
-
-sed -i '/rabbitmq_password=/ c rabbitmq_password=\'\'$rabbitmq_passwd'\'\' /tmp/tower/$(ls -a /tmp/tower | grep ansible-tower-setup-[34])/inventory
 
 #################################################################
 Opcional, descomentar para ejecutar instalador con script
